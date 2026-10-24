@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#050507" />
+<meta name="description" content="iPhone 18 Pro 대화형 시뮬레이터 — 브라우저에서 만나는 고품질 iOS 체험." />
+<title>iPhone 18 Pro — 대화형 시뮬레이터</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Crect x='19' y='9' width='26' height='46' rx='7' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Ccircle cx='32' cy='48' r='2.4' fill='%23fff'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <span class="orb orb-a"></span>
+    <span class="orb orb-b"></span>
+    <span class="orb orb-c"></span>
+    <div class="grain"></div>
+  </div>
+
+  <header class="masthead">
+    <div class="brand"><span class="brand-dot"></span> iPhone 18 Pro</div>
+    <div class="tagline">완성된 iOS 체험 — 모든 앱을 직접 사용할 수 있습니다.</div>
+  </header>
+
+  <main class="stage" id="stage">
+    <div class="device" id="device">
+      <div class="device-rail device-rail-left" aria-hidden="true"></div>
+      <div class="device-rail device-rail-right" aria-hidden="true"></div>
+      <div class="device-buttons" aria-hidden="true">
+        <span class="btn-action"></span>
+        <span class="btn-vol up"></span>
+        <span class="btn-vol down"></span>
+        <span class="btn-power"></span>
+      </div>
+      <div class="device-frame">
+        <div class="screen" id="screen" data-theme="dark">
+
+          <div class="wallpaper" id="wallpaper"></div>
+
+          <div class="statusbar" id="statusbar">
+            <div class="sb-left" id="sbLeft"><span id="sbTime">9:41</span></div>
+            <div class="sb-right">
+              <svg class="sb-icon" viewBox="0 0 20 14" aria-hidden="true"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="4.5" y="6.5" width="3" height="7.5" rx="1"/><rect x="9" y="3.5" width="3" height="10.5" rx="1"/><rect x="13.5" y="0.5" width="3" height="13.5" rx="1" opacity=".38"/></svg>
+              <svg class="sb-icon" viewBox="0 0 18 14" aria-hidden="true"><path d="M9 12.6a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2Zm0-5.2c1.5 0 2.9.6 3.9 1.6l1.3-1.4A7.6 7.6 0 0 0 9 5.2a7.6 7.6 0 0 0-5.2 2.4l1.3 1.4c1-1 2.4-1.6 3.9-1.6Zm0-4.8c2.6 0 5 .9 6.8 2.6L17 3.8A11.4 11.4 0 0 0 9 .4C6 0 3.2 1.2 1 3.8l1.3 1.4A9.6 9.6 0 0 1 9 2.6Z"/></svg>
+              <span class="battery"><span class="battery-fill" id="batteryFill"></span></span>
+            </div>
+          </div>
+
+          <div class="island" id="island" role="button" tabindex="0" aria-label="다이나믹 아일랜드">
+            <div class="island-idle" id="islandIdle">
+              <span class="island-cam"></span>
+            </div>
+            <div class="island-expanded" id="islandExpanded"></div>
+          </div>
+
+          <section class="lockscreen" id="lockscreen" aria-label="잠금 화면">
+            <div class="lock-top">
+              <div class="lock-symbol"><svg viewBox="0 0 24 24"><path d="M7 10V7.5a5 5 0 0 1 10 0V10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="4.5" y="10" width="15" height="10" rx="3" fill="currentColor"/></svg></div>
+              <div class="lock-date" id="lockDate">10월 24일 토요일</div>
+              <div class="lock-time" id="lockTime">9:41</div>
+              <div class="lock-widgets">
+                <div class="lock-widget"><span class="lw-icon">☀️</span><b>72°</b><span>맑음</span></div>
+                <div class="lock-widget"><span class="lw-icon">🔋</span><b>92%</b><span>배터리</span></div>
+                <div class="lock-widget"><span class="lw-icon">📅</span><b>3</b><span>일정</span></div>
+              </div>
+            </div>
+
+            <div class="lock-bottom">
+              <div class="lock-notifications" id="lockNotifications"></div>
+              <div class="lock-hint" id="lockHint">위로 밀어 잠금 해제</div>
+              <div class="lock-actions">
+                <button class="lock-action" id="lockFlash" aria-label="손전등"><svg viewBox="0 0 24 24"><path d="M8 3h8v3l-2 3v11a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2V9L8 6V3Z" fill="currentColor"/></svg></button>
+                <button class="lock-action" id="lockCamera" aria-label="카메라"><svg viewBox="0 0 24 24"><path d="M4 7h3l1.6-2h6.8L17 7h3a1 1 0 0 1 1 1v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></button>
+              </div>
+              <div class="home-indicator" id="lockIndicator" aria-label="잠금 해제"></div>
+            </div>
+          </section>
+
+          <section class="home hidden" id="home" aria-label="홈 화면">
+            <div class="widget-row">
+              <button class="home-widget weather-widget" data-open="weather">
+                <div class="hw-top"><span class="hw-city">쿠퍼티노</span><span class="hw-temp">72°</span></div>
+                <div class="hw-sky" aria-hidden="true"><span class="sun"></span><span class="cloud c1"></span><span class="cloud c2"></span></div>
+                <div class="hw-bottom"><span>맑음</span><span>최고 78° 최저 61°</span></div>
+              </button>
+              <button class="home-widget clock-widget" data-open="clock">
+                <div class="cw-analog" aria-hidden="true"><span class="cw-hand h"></span><span class="cw-hand m"></span><span class="cw-hand s"></span><span class="cw-pin"></span></div>
+                <div class="cw-meta"><b>쿠퍼티노</b><span id="cwTime">9:41</span></div>
+              </button>
+            </div>
+            <div class="home-pages" id="homePages">
+              <div class="home-page" data-page="0"><div class="app-grid" id="grid0"></div></div>
+              <div class="home-page" data-page="1"><div class="app-grid" id="grid1"></div></div>
+            </div>
+            <div class="page-dots" id="pageDots"><span class="dot active"></span><span class="dot"></span></div>
+            <div class="dock" id="dock"></div>
+            <div class="home-indicator" id="homeIndicator" aria-label="Home"></div>
+          </section>
+
+          <div class="app-layer" id="appLayer" aria-live="polite"></div>
+
+          <div class="app-switcher" id="switcher" aria-label="앱 전환기">
+            <div class="switcher-title">앱 전환기</div>
+            <div class="switcher-track" id="switcherTrack"></div>
+            <button class="switcher-home" id="switcherHome">홈</button>
+          </div>
+
+          <div class="spotlight" id="spotlight">
+            <div class="spotlight-panel">
+              <div class="spotlight-search">
+                <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 15.5 4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <input id="spotlightInput" type="text" placeholder="앱, 메모, 메시지 검색" autocomplete="off" spellcheck="false" />
+                <button id="spotlightClose">취소</button>
+              </div>
+              <div class="spotlight-results" id="spotlightResults"></div>
+            </div>
+          </div>
+
+          <div class="control-center" id="controlCenter">
+            <div class="cc-panel">
+              <div class="cc-top">
+                <div class="cc-connect">
+                  <button class="cc-toggle" data-toggle="airplane"><span class="cc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 2.6a1.5 1.5 0 0 1 3 0v5l8 4.5v2l-8-2v5l2.5 1.6V21l-4.5-1.3L7 21v-2.3l2.5-1.6v-5l-8 2v-2l8-4.5z" fill="currentColor"/></svg></span><span class="cc-label">비행기 모드</span></button>
+                  <button class="cc-toggle on" data-toggle="wifi"><span class="cc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10.5 10.5 0 0 1 14 0M8.3 15.3a5.8 5.8 0 0 1 7.4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="19" r="1.4" fill="currentColor"/></svg></span><span class="cc-label">Wi‑Fi</span></button>
+                  <button class="cc-toggle on" data-toggle="bluetooth"><span class="cc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10-5 5V2l5 5L7 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></span><span class="cc-label">블루투스</span></button>
+                  <button class="cc-toggle on" data-toggle="cellular"><span class="cc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="14" width="3.2" height="6" rx="1" fill="currentColor"/><rect x="7.3" y="10.5" width="3.2" height="9.5" rx="1" fill="currentColor"/><rect x="12.6" y="7" width="3.2" height="13" rx="1" fill="currentColor"/><rect x="17.9" y="3.5" width="3.2" height="16.5" rx="1" fill="currentColor"/></svg></span><span class="cc-label">셀룰러</span></button>
+                </div>
+                <div class="cc-stack">
+                  <button class="cc-toggle on" data-toggle="dark"><span class="cc-ico">◐</span><span class="cc-label">다크 모드</span></button>
+                  <button class="cc-toggle" data-toggle="focus"><span class="cc-ico">☾</span><span class="cc-label">집중 모드</span></button>
+                  <button class="cc-toggle" data-toggle="flash"><span class="cc-ico">✦</span><span class="cc-label">손전등</span></button>
+                </div>
+              </div>
+              <div class="cc-player">
+                <div class="cc-art" id="ccArt">♪</div>
+                <div class="cc-meta"><b id="ccTrack">재생 중인 음악 없음</b><span id="ccArtist">음악을 열어 재생하세요</span></div>
+                <button class="cc-play" id="ccPlay">▶</button>
+              </div>
+              <div class="cc-slider">
+                <span>☀︎</span>
+                <input type="range" min="20" max="100" value="100" id="brightness" aria-label="밝기" />
+                <span>☀︎</span>
+              </div>
+              <div class="cc-slider">
+                <span>🔈</span>
+                <input type="range" min="0" max="100" value="65" id="volume" aria-label="볼륨" />
+                <span>🔊</span>
+              </div>
+              <div class="cc-grid">
+                <button data-open="calculator"><span>🧮</span>계산기</button>
+                <button data-open="camera"><span>📷</span>카메라</button>
+                <button data-open="notes"><span>📝</span>메모</button>
+                <button data-open="settings"><span>⚙️</span>설정</button>
+              </div>
+              <div class="cc-grab"></div>
+            </div>
+          </div>
+
+          <div class="notification-center" id="notificationCenter">
+            <div class="nc-panel">
+              <div class="nc-head"><b id="ncDate">10월 24일 토요일</b><button id="ncClear">지우기</button></div>
+              <div class="nc-list" id="ncList"></div>
+              <div class="cc-grab"></div>
+            </div>
+          </div>
+
+          <div class="toast" id="toast"><span class="toast-ico" id="toastIco">✓</span><span id="toastMsg"></span></div>
+          <div class="flashlight-glow" id="flashlightGlow"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <span><kbd>위로 밀기</kbd> 잠금 해제</span>
+    <span><kbd>오른쪽 위 ↓</kbd> 제어 센터</span>
+    <span><kbd>왼쪽 위 ↓</kbd> 알림</span>
+    <span><b id="clockHint">9:41</b></span>
+  </footer>
+
+  <div class="rotate-hint" id="rotateHint">기기를 다시 세로로 돌려주세요</div>
+
+  <script src="assets/icons.js"></script>
+  <script src="assets/core.js"></script>
+  <script src="assets/apps.js"></script>
+  <script src="assets/apps2.js"></script>
+  <script src="assets/apps3.js"></script>
+  <script src="assets/i18n.js"></script>
+</body>
+</html>
