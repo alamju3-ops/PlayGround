@@ -9,6 +9,14 @@
   const SCREEN_W = 393;
   const SCREEN_H = 852;
   const STORE = 'iphone18sim.v1';
+  const MEDIA = window.MEDIA || {};
+  const IG_MEDIA = MEDIA.instagram || {};
+  const SP_MEDIA = MEDIA.spotify || {};
+  const igAvatar = (user) => (IG_MEDIA.users && IG_MEDIA.users[user]) || '';
+  const igPostImage = (id) => (IG_MEDIA.posts && IG_MEDIA.posts[id]) || '';
+  const igStoryImage = (id) => (IG_MEDIA.stories && IG_MEDIA.stories[id]) || '';
+  const igReelImage = (id) => (IG_MEDIA.reels && IG_MEDIA.reels[id]) || '';
+  const spPlaylistCover = (id) => (SP_MEDIA.playlistCovers && SP_MEDIA.playlistCovers[id]) || '';
 
   /* ---------------- store ---------------- */
   const defaults = {
@@ -63,7 +71,104 @@
       { name: 'Emma', number: '+1 (415) 555-0132', type: 'incoming', time: '9:20', missed: false },
       { name: '엄마', number: '+1 (408) 555-0177', type: 'missed', time: '어제', missed: true }
     ],
-    fitness: { move: 420, exercise: 24, stand: 9 }
+    fitness: { move: 420, exercise: 24, stand: 9 },
+    instagram: {
+      profile: {
+        username: 'alex.morgan',
+        name: 'Alex Morgan',
+        bio: 'iPhone 18 Pro로 담은 일상 📸\n서울 · 디자인 스튜디오',
+        avatar: igAvatar('alex.morgan'),
+        posts: '6',
+        followers: '12.4K',
+        following: '318'
+      },
+      posts: [
+        {
+          id: 'igp1',
+          user: 'alex.morgan',
+          avatar: igAvatar('alex.morgan'),
+          location: '서울, 대한민국',
+          image: igPostImage('igp1'),
+          caption: '주말의 빛. iPhone 18 Pro로 담았습니다.',
+          likes: 1284,
+          liked: false,
+          saved: false,
+          time: '2시간 전',
+          comments: [
+            { user: 'emma.k', text: '색감 미쳤다 😍' },
+            { user: 'alex.chen', text: '여기 어디야?' }
+          ]
+        },
+        {
+          id: 'igp2',
+          user: 'alex.morgan',
+          avatar: igAvatar('alex.morgan'),
+          location: '성수동, 서울',
+          image: igPostImage('igp2'),
+          caption: '오늘의 커피와 오후의 고요 ☕️',
+          likes: 842,
+          liked: true,
+          saved: true,
+          time: '어제',
+          comments: [
+            { user: 'min.j', text: '분위기 좋다!' }
+          ]
+        },
+        {
+          id: 'igp3',
+          user: 'alex.morgan',
+          avatar: igAvatar('alex.morgan'),
+          location: '한강, 서울',
+          image: igPostImage('igp3'),
+          caption: '파도 소리로 시작한 아침.',
+          likes: 2310,
+          liked: false,
+          saved: false,
+          time: '3일 전',
+          comments: [
+            { user: 'sora', text: '완벽한 순간 🌊' },
+            { user: 'travel.kr', text: '저장했어요!' }
+          ]
+        },
+        {
+          id: 'igp4',
+          user: 'alex.morgan',
+          avatar: igAvatar('alex.morgan'),
+          location: '북한산',
+          image: igPostImage('igp4'),
+          caption: '안개 낀 숲은 언제나 옳다.',
+          likes: 967,
+          liked: false,
+          saved: false,
+          time: '5일 전',
+          comments: []
+        }
+      ],
+      stories: [
+        { id: 's1', user: 'emma.k', avatar: igAvatar('emma.k'), image: igStoryImage('s1'), seen: false },
+        { id: 's2', user: 'alex.chen', avatar: igAvatar('alex.chen'), image: igStoryImage('s2'), seen: false },
+        { id: 's3', user: 'design.team', avatar: igAvatar('design.team'), image: igStoryImage('s3'), seen: false },
+        { id: 's4', user: 'sora', avatar: igAvatar('sora'), image: igStoryImage('s4'), seen: true },
+        { id: 's5', user: 'travel.kr', avatar: igAvatar('travel.kr'), image: igStoryImage('s5'), seen: false }
+      ],
+      reels: [
+        { id: 'r1', user: 'alex.morgan', image: igReelImage('r1'), caption: '겨울 산의 공기', likes: 4210, liked: false },
+        { id: 'r2', user: 'emma.k', image: igReelImage('r2'), caption: '오늘의 디테일', likes: 1890, liked: false },
+        { id: 'r3', user: 'sora', image: igReelImage('r3'), caption: '바다로 떠나요', likes: 6320, liked: false }
+      ]
+    },
+    spotify: {
+      playlists: [
+        { id: 'sp1', name: '레이트 나이트 드라이브', description: '밤에 듣기 좋은 신스팝', cover: spPlaylistCover('sp1'), trackIds: [0, 1, 4] },
+        { id: 'sp2', name: '포커스 플로우', description: '집중이 필요한 순간', cover: spPlaylistCover('sp2'), trackIds: [2, 3] },
+        { id: 'sp3', name: '골든 아워', description: '노을과 함께하는 플레이리스트', cover: spPlaylistCover('sp3'), trackIds: [2, 0] },
+        { id: 'sp4', name: '오션 에어', description: '파도 소리와 함께', cover: spPlaylistCover('sp4'), trackIds: [1, 4, 3] }
+      ],
+      liked: [0, 2, 3],
+      recent: [0, 1, 2, 3],
+      shuffle: false,
+      repeat: false
+    }
   };
 
   function todayKey(d = new Date()) { return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
@@ -133,6 +238,8 @@
     index: 0,
     playing: false,
     elapsed: 0,
+    shuffle: !!db.get('musicShuffle', false),
+    repeat: !!db.get('musicRepeat', false),
     gain: null,
     nodes: null,
     timer: null,
@@ -141,7 +248,7 @@
     listeners: new Set(),
     onChange(fn) { this.listeners.add(fn); return () => this.listeners.delete(fn); },
     emit() { this.listeners.forEach((fn) => { try { fn(this.state()); } catch (e) { console.error(e); } }); },
-    state() { return { track: TRACKS[this.index], playing: this.playing, elapsed: this.elapsed, tracks: TRACKS, index: this.index }; },
+    state() { return { track: TRACKS[this.index], playing: this.playing, elapsed: this.elapsed, tracks: TRACKS, index: this.index, shuffle: this.shuffle, repeat: this.repeat }; },
     startEngine() {
       const ctx = audio.ensure(); if (!ctx) return;
       if (!this.gain) {
@@ -235,8 +342,19 @@
       this.emit();
       if (autoplay || wasPlaying) setTimeout(() => this.play(), 30);
     },
-    next() { this.select(this.index + 1); },
+    next() {
+      if (this.repeat) { this.elapsed = 0; this.emit(); return; }
+      if (this.shuffle) {
+        let i = this.index;
+        while (i === this.index) i = Math.floor(Math.random() * TRACKS.length);
+        this.select(i);
+        return;
+      }
+      this.select(this.index + 1);
+    },
     prev() { if (this.elapsed > 4) { this.elapsed = 0; this.emit(); } else this.select(this.index - 1); },
+    setShuffle(v) { this.shuffle = !!v; db.set('musicShuffle', this.shuffle); this.emit(); },
+    setRepeat(v) { this.repeat = !!v; db.set('musicRepeat', this.repeat); this.emit(); },
     seek(frac) { this.elapsed = Math.floor(TRACKS[this.index].dur * clamp(frac, 0, 1)); this.emit(); },
     setVolume(v) { if (this.gain && audio.ctx) this.gain.gain.value = (v / 100) * 0.16; },
     fmt(s) { s = Math.floor(s || 0); return `${Math.floor(s / 60)}:${pad(s % 60)}`; }
@@ -293,21 +411,10 @@
 
     fit() {
       const device = $('#device');
-      const stage = $('#stage');
-      if (!device || !stage) return;
-      const mobile = window.innerWidth <= 760;
-      const availW = window.innerWidth - (mobile ? 16 : 40);
-      const availH = window.innerHeight - (mobile ? 26 : 170);
-      const s = Math.min(availW / 419, availH / 878, mobile ? 1.12 : 1);
-      const scale = Math.max(0.3, s);
+      if (!device) return;
+      const scale = Math.max(0.3, Math.min(window.innerWidth / SCREEN_W, window.innerHeight / SCREEN_H));
       device.style.transform = `scale(${scale})`;
-      stage.style.width = `${419 * scale}px`;
-      stage.style.height = `${878 * scale}px`;
-      stage.style.position = 'relative';
-      device.style.position = 'absolute';
-      device.style.left = '0';
-      device.style.top = '0';
-      device.style.transformOrigin = 'top left';
+      device.style.transformOrigin = 'center center';
     },
 
     clockTick() {
@@ -621,6 +728,7 @@
 
     openSwitcher() {
       const track = $('#switcherTrack');
+      const photos = MEDIA.appIcons || {};
       const items = this.recent.filter((id) => window.appById(id));
       track.innerHTML = items.length ? items.map((id) => {
         const a = window.appById(id);
@@ -628,7 +736,7 @@
         return `<div class="switcher-card" data-switch="${id}">
           <button class="sc-close" data-switch-close="${id}" aria-label="${a.name} 닫기">×</button>
           <div class="sc-inner">
-            <span class="sc-icon" style="background:${a.grad};color:${a.darkIcon ? '#111' : '#fff'}"><svg viewBox="0 0 24 24" style="width:24px;height:24px">${window.ICONS[a.icon]}</svg></span>
+            <span class="sc-icon" style="background:${a.grad};color:${a.darkIcon ? '#111' : '#fff'}">${photos[id] ? `<img src="${esc(photos[id])}" alt="">` : `<svg viewBox="0 0 24 24" style="width:24px;height:24px">${window.ICONS[a.icon]}</svg>`}</span>
             <b>${a.name}</b>
             <span>${meta}</span>
           </div>
@@ -643,7 +751,7 @@
         photos: '나의 보관함과 앨범', music: '재생 중인 음악과 보관함', notes: '이 기기에 동기화된 메모',
         settings: '배경화면, 화면 모드, 기기 정보', camera: '브라우저 카메라로 사진 촬영',
         safari: '내장 웹 브라우저 둘러보기', phone: '키패드, 최근 통화, 연락처', maps: '장소 탐색 및 검색',
-        calendar: '나의 일정', calculator: '표준 계산기'
+        calendar: '나의 일정', calculator: '표준 계산기', instagram: '피드, 릴스, 스토리와 프로필', spotify: '플레이리스트와 지금 재생 중'
       };
       return m[id] || '최근 사용';
     },
@@ -693,16 +801,17 @@
     spotlightSearch(q) {
       const query = q.trim().toLowerCase();
       const results = [];
+      const photos = MEDIA.appIcons || {};
       const terms = ['Siri', 'Search', 'Apps', 'Settings', 'Weather', 'Messages', 'Photos', 'Music', '메모s', 'Calendar', 'Camera', 'Maps', 'Mail', 'Clock'];
       if (!query) {
         ['messages', 'music', 'photos', 'settings', 'notes', 'weather'].forEach((id) => {
           const a = window.appById(id);
-          results.push({ kind: 'app', id, title: a.name, sub: '앱', icon: a.icon, grad: a.grad, darkIcon: a.darkIcon });
+          results.push({ kind: 'app', id, title: a.name, sub: '앱', icon: a.icon, grad: a.grad, darkIcon: a.darkIcon, photo: photos[id] });
         });
         results.push({ kind: 'siri', title: 'Siri에게 묻기', sub: '“날씨 어때?”라고 해보세요', icon: 'tips', grad: 'linear-gradient(150deg,#ff5f6d,#7a2cf0)' });
       } else {
         window.APPS.concat(window.DOCK).filter((a) => a.name.toLowerCase().includes(query)).forEach((a) => {
-          results.push({ kind: 'app', id: a.id, title: a.name, sub: '앱', icon: a.icon, grad: a.grad, darkIcon: a.darkIcon });
+          results.push({ kind: 'app', id: a.id, title: a.name, sub: '앱', icon: a.icon, grad: a.grad, darkIcon: a.darkIcon, photo: photos[a.id] });
         });
         db.get('notes', []).filter((n) => (n.title + ' ' + n.body).toLowerCase().includes(query)).forEach((n) => {
           results.push({ kind: 'note', id: n.id, title: n.title, sub: '메모', icon: 'notes', grad: 'linear-gradient(180deg,#fff9d6,#ffd60a)', darkIcon: true });
@@ -719,7 +828,7 @@
       el.innerHTML = results.slice(0, 9).map((r) => `
         <button class="sp-row" data-sp="${r.kind}" data-id="${r.id}" data-title="${esc(r.title)}">
           <span class="sp-ico" style="background:${r.grad};color:${r.darkIcon ? '#111' : '#fff'}">
-            <svg viewBox="0 0 24 24" style="width:18px;height:18px">${window.ICONS[r.icon] || '✦'}</svg>
+            ${r.photo ? `<img src="${esc(r.photo)}" alt="">` : `<svg viewBox="0 0 24 24" style="width:18px;height:18px">${window.ICONS[r.icon] || '✦'}</svg>`}
           </span>
           <span><b>${esc(r.title)}</b><span>${esc(r.sub)}</span></span>
         </button>`).join('');

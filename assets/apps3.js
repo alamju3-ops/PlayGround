@@ -176,7 +176,7 @@
           <div style="display:flex;align-items:flex-end;justify-content:space-between;height:90px;gap:8px">
             ${[62, 78, 45, 90, 70, 84, 52].map((v, i) => `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end">
               <span style="width:100%;height:${v}%;background:linear-gradient(180deg,#ff2d55,#ff6482);border-radius:6px"></span>
-              <small style="font-size:9px;color:#8e8e93">${['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}</small></div>`).join('')}
+              <small style="font-size:9px;color:#8e8e93">${['월', '화', '수', '목', '금', '토', '일'][i]}</small></div>`).join('')}
           </div>
         </div>
         <div class="section-label">Highlights</div>
@@ -1001,7 +1001,7 @@
           <div style="display:flex;align-items:flex-end;justify-content:space-between;height:110px;gap:8px">
             ${[55, 72, 48, 88, 66, 80, 58].map((v, i) => `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end">
               <span style="width:100%;height:${v}%;background:${i === 4 ? 'linear-gradient(180deg,#ff2d55,#ff6482)' : '#e8e8ed'};border-radius:6px"></span>
-              <small style="font-size:9px;color:#8e8e93">${['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}</small></div>`).join('')}
+              <small style="font-size:9px;color:#8e8e93">${['월', '화', '수', '목', '금', '토', '일'][i]}</small></div>`).join('')}
           </div>
         </div>
         <div class="section-label">Workouts</div>
@@ -1152,7 +1152,7 @@
           <div style="font-size:44px;font-weight:300;letter-spacing:-.03em">3h 47m</div>
           <div style="font-size:11px;color:#30d158">▼ 18% from last week</div>
           <div style="display:flex;align-items:flex-end;justify-content:space-between;height:80px;gap:7px;margin-top:14px">
-            ${[48, 66, 54, 82, 70, 38, 58].map((v, i) => `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><span style="width:100%;height:${v}%;background:${i === 3 ? '#0a84ff' : '#e8e8ed'};border-radius:5px"></span><small style="font-size:9px;color:#8e8e93">${['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}</small></div>`).join('')}
+            ${[48, 66, 54, 82, 70, 38, 58].map((v, i) => `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><span style="width:100%;height:${v}%;background:${i === 3 ? '#0a84ff' : '#e8e8ed'};border-radius:5px"></span><small style="font-size:9px;color:#8e8e93">${['월', '화', '수', '목', '금', '토', '일'][i]}</small></div>`).join('')}
           </div>
         </div>
         <div class="section-label">Most Used</div>

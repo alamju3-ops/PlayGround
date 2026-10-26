@@ -725,7 +725,7 @@
       theme(view, true);
       view.classList.add('music-app');
       const music = ctx.music;
-      let repeat = false, shuffle = false;
+      let repeat = music.repeat, shuffle = music.shuffle;
       const bag = cleanupBag();
 
       view.innerHTML = `
@@ -808,8 +808,8 @@
         if (e.target.closest('#mPrev')) { music.prev(); return; }
         const track = e.target.closest('[data-track]');
         if (track) { music.select(+track.dataset.track); return; }
-        if (e.target.closest('#mShuffle')) { shuffle = !shuffle; paint(); ctx.toast(shuffle ? 'Shuffle on' : 'Shuffle off', '⤨'); return; }
-        if (e.target.closest('#mRepeat')) { repeat = !repeat; paint(); ctx.toast(repeat ? 'Repeat on' : 'Repeat off', '↻'); return; }
+        if (e.target.closest('#mShuffle')) { shuffle = !shuffle; music.setShuffle(shuffle); paint(); ctx.toast(shuffle ? 'Shuffle on' : 'Shuffle off', '⤨'); return; }
+        if (e.target.closest('#mRepeat')) { repeat = !repeat; music.setRepeat(repeat); paint(); ctx.toast(repeat ? 'Repeat on' : 'Repeat off', '↻'); return; }
         if (e.target.closest('#mLyrics')) { ctx.toast('Lyrics coming soon', '”'); return; }
         if (e.target.closest('#mMore')) { ctx.toast('Added to your library', '＋'); return; }
         if (e.target.closest('#mProgress')) {

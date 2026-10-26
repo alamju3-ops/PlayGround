@@ -43,7 +43,9 @@
     compass: `<circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m16 8-2.6 6-5.4 2 2.6-6L16 8Z" fill="currentColor"/><path d="M12 2.8v1.6M12 19.6v1.6M2.8 12h1.6M19.6 12h1.6" stroke="currentColor" stroke-width="1.2" opacity=".6"/>`,
     clock2: `<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
     screentime: `<circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 12V4.2A7.8 7.8 0 0 1 19.8 12H12Z" fill="currentColor"/>`,
-    news: `<path d="M4 4h13v16H6a2 2 0 0 1-2-2V4Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M17 8h3v10a2 2 0 0 1-2 2h-1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h7M7 11.5h7M7 15h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`
+    news: `<path d="M4 4h13v16H6a2 2 0 0 1-2-2V4Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M17 8h3v10a2 2 0 0 1-2 2h-1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h7M7 11.5h7M7 15h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
+    instagram: `<rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4.15" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.9" r="1.18" fill="currentColor"/>`,
+    spotify: `<circle cx="12" cy="12" r="9.3" fill="none" stroke="#1ed760" stroke-width="1.4" opacity=".38"/><path d="M6.3 9.1c3.8-1.15 7.8-.8 11.4 1.05M7.05 12.15c3.1-.85 6.35-.5 9.2.95M7.8 15.05c2.4-.6 4.9-.3 7.1.85" fill="none" stroke="#1ed760" stroke-width="2" stroke-linecap="round"/>`
   };
 
   const A = (id, name, icon, grad, page, extra = {}) => ({
@@ -84,7 +86,9 @@
     A('measure', '측정', 'measure', 'linear-gradient(180deg,#2c2c2e,#000)', 0),
     A('compass', '나침반', 'compass', 'linear-gradient(180deg,#1c1c1e,#000)', 0),
     A('screentime', '스크린 타임', 'screentime', 'linear-gradient(160deg,#6c8bff,#3b4ce0)', 0),
-    A('news', '뉴스', 'news', 'linear-gradient(160deg,#ff5d5d,#e01b24)', 0)
+    A('news', '뉴스', 'news', 'linear-gradient(160deg,#ff5d5d,#e01b24)', 0),
+    A('instagram', '인스타그램', 'instagram', 'linear-gradient(135deg,#feda75 0%,#fa7e1e 28%,#d62976 52%,#962fbf 76%,#4f5bd5 100%)', 1),
+    A('spotify', 'Spotify', 'spotify', 'linear-gradient(180deg,#202020,#000)', 1)
   ];
 
   const DOCK = [
@@ -101,8 +105,11 @@
   window.iconMarkup = (app, size) => {
     const svg = ICONS[app.icon] || '';
     const color = app.darkIcon ? '#111' : '#fff';
+    const media = (window.MEDIA && window.MEDIA.appIcons) || {};
+    const photo = String(app.photo || media[app.id] || '').replace(/"/g, '&quot;');
     return `<span class="icon-tile" style="background:${app.grad};color:${color}">
       <svg viewBox="0 0 24 24" aria-hidden="true">${svg}</svg>
+      ${photo ? `<img class="icon-photo" src="${photo}" alt="" loading="lazy" onerror="this.remove()">` : ''}
     </span>`;
   };
 })();
